@@ -35,6 +35,7 @@ class Cats:
         self.age = age
         self.energy = energy
         self.lives_count = lives
+        self.mouse_storage = []
         Cats.proverka(self)
 
     def sleep(self):
@@ -43,7 +44,10 @@ class Cats:
         return Cats.proverka(self)
 
     def eat(self):
-        self.energy += 1
+        self.mouse_storage.append(Mouse.mouse)
+        if len(self.mouse_storage) > 2:
+            self.mouse_storage.clear()
+            self.energy += 1
         return Cats.proverka(self)
 
     def catch_mouse(self):
@@ -61,13 +65,17 @@ class Cats:
             Cemetery.go_to_astral(self.name)
 
 
+class Mouse:
+    mouse = 'maus'
+
+
 cemetery = []
 
 
 class Cemetery:
     # TODO порешать со списком. норм ли, что он вне класса
-    @classmethod
-    def go_to_astral(cls, name):
+    @staticmethod
+    def go_to_astral(name):
         global cemetery
         cemetery.append(name)
         if len(cemetery) > 5:
